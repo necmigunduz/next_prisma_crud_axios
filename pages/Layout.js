@@ -21,7 +21,7 @@ const Layout = () => {
   console.log(errors);
   console.log(tasks);
   const handleClick = async (data) => {
-    console.log("DATA", data)
+    console.log("DATA", data);
     const response = await axios.post("/api/new-task", {
       data: {
         title: data.title,
@@ -58,23 +58,20 @@ const Layout = () => {
         />
         {errors.title && <p>Title is {errors.title.type}!</p>}
         <label>Description</label>
-        {/* <textarea
-          {...register("description", { required: true, min: 150, max: 2500 })}
-          placeholder="Enter task description here..."
-        /> */}
-
-        <Controller
-          name="description"
-          control={control}
-          render={({ field }) => (
-            <SimpleMDE
-              placeholder="Enter your description here..."
-              name="description"
-              {...field}
-            />
-          )}
-        />
-
+        {typeof document !== 'undefined' && (
+          <Controller
+            name="description"
+            control={control}
+            render={({ field }) => (
+              <SimpleMDE
+                placeholder="Enter your description here..."
+                name="description"
+                {...field}
+              />
+            )}
+            rules={{ required: 'Description is required.' }}
+          />
+        )}
         {errors.description && <p>Description is {errors.description.type}!</p>}
         <label>Username</label>
         <input

@@ -34,11 +34,11 @@ const TaskBox = ({ tasks }) => {
                   </p>
                 </div>
                 <div className="flex space-x-2 rounded-md mb-2 mt-4 justify-center">
-                  <button className="bg-blue-700 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded">
+                  <button className="bg-blue-700 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded active:bg-blue-900">
                     Update
                   </button>
                   <button
-                    className="bg-red-700 hover:bg-red-500 text-white font-bold py-2 px-4 rounded"
+                    className="bg-red-700 hover:bg-red-500 text-white font-bold py-2 px-4 rounded active:bg-red-900"
                     onClick={() => handleDelete(task?.id)}
                   >
                     Delete

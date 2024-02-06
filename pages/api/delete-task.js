@@ -1,7 +1,7 @@
 import prisma from "@/prisma/client";
 
 export default async function handler(req, res) {
-  const { taskId } = JSON.parse(req.body);
+  const { taskId } = req.body;
   if (req.method === "DELETE") {
     await prisma.tasklist
       .delete({

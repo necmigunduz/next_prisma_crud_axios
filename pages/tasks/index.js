@@ -23,11 +23,14 @@ const Tasks = () => {
   };
 
   const handleDelete = async (id) => {
-    const res = await fetch("/api/delete-task", {
-      method: "DELETE",
-      body: JSON.stringify({ taskId: id }),
-    });
-    await res.json();
+    try {
+      const res = await axios.delete("/api/delete-task", {
+        data: { taskId: id },
+      });
+      return res.data;
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
   };
 
   useEffect(() => {

@@ -1,6 +1,18 @@
 import React from "react";
+import axios from 'axios';
 
 const TaskBox = ({ tasks }) => {
+  const handleDelete = async (id) => {
+    try {
+      const res = await axios.delete("/api/delete-task", {
+        data: { taskId: id },
+      });
+      return res.data;
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  };
+  
   return (
     <div>
       {tasks?.length === 0 ? (

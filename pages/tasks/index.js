@@ -21,17 +21,6 @@ const Tasks = () => {
       .catch((e) => console.log(e));
   };
 
-  const handleDelete = async (id) => {
-    try {
-      const res = await axios.delete("/api/delete-task", {
-        data: { taskId: id },
-      });
-      return res.data;
-    } catch (error) {
-      console.error("Error deleting task:", error);
-    }
-  };
-
   useEffect(() => {
     getTask(user);
     getAllUsers();

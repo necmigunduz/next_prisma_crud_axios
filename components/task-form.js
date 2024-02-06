@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import dynamic from "next/dynamic";
+import axios from 'axios';
 import { Inter } from "next/font/google";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
@@ -71,7 +72,7 @@ const TaskForm = () => {
           className="mb-3 border h-12"
         />
         {errors.username && <p>Username is {errors.username.type}!</p>}
-        <input type="submit" className="bg-slate-600 rounded p-5" />
+        <input type="submit" className="bg-slate-900 rounded p-4 text-white active:bg-slate-600 active:p-5" />
       </form>
     </div>
   );

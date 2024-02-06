@@ -10,6 +10,7 @@ const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
 });
 import "easymde/dist/easymde.min.css";
 import Navbar from "./navbar";
+import { useRouter } from "next/router";
 const inter = Inter({ subsets: ["latin"] });
 
 const Layout = () => {
@@ -20,6 +21,7 @@ const Layout = () => {
     control,
     formState: { errors },
   } = useForm();
+  const router = useRouter();
 
   const handleClick = async (data) => {
     console.log("DATA", data);
@@ -30,7 +32,7 @@ const Layout = () => {
         username: data.username,
       },
     });
-    console.log("RESPONSE", response);
+    router.push("/tasks")
     return;
   };
 

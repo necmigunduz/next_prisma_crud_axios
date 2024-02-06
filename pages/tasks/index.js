@@ -33,7 +33,7 @@ const Tasks = () => {
   useEffect(() => {
     getTask(user);
     getAllUsers();
-  }, [user]);
+  }, [user, tasks]);
 
   return (
     <>

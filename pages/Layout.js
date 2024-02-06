@@ -35,45 +35,55 @@ const Layout = () => {
   };
 
   return (
-    <>
+    <div>
       <Navbar />
-      <div className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}>
-      <form
-        onSubmit={handleSubmit(handleClick)}
-        className="flex flex-col space-y-2"
+      <h1 className="text-center text-3xl mt-6">
+        Welcome to Task List Application
+      </h1>
+      <div
+        className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
       >
-        <label>Title</label>
-        <input
-          {...register("title", { required: true, min: 5, max: 255 })}
-          placeholder="Enter task title here..."
-        />
-        {errors.title && <p>Title is {errors.title.type}!</p>}
-        <label>Description</label>
-        {typeof document !== 'undefined' && (
-          <Controller
-            name="description"
-            control={control}
-            render={({ field }) => (
-              <SimpleMDE
-                placeholder="Enter your description here..."
-                name="description"
-                {...field}
-              />
-            )}
-            rules={{ required: 'Description is required.' }}
+        <h2>Please fill the form to enter a new task!</h2>
+        <form
+          onSubmit={handleSubmit(handleClick)}
+          className="flex flex-col space-y-2"
+        >
+          <label className="text-2xl">Title</label>
+          <input
+            {...register("title", { required: true, min: 5, max: 255 })}
+            placeholder="Enter task title here..."
+            className="border h-12"
           />
-        )}
-        {errors.description && <p>Description is {errors.description.type}!</p>}
-        <label>Username</label>
-        <input
-          {...register("username", { required: true, min: 5 })}
-          placeholder="Enter username here..."
-        />
-        {errors.username && <p>Username is {errors.username.type}!</p>}
-        <input type="submit" className="bg-slate-600 rounded p-5" />
-      </form>
+          {errors.title && <p>Title is {errors.title.type}!</p>}
+          <label className="text-2xl">Description</label>
+          {typeof document !== "undefined" && (
+            <Controller
+              name="description"
+              control={control}
+              render={({ field }) => (
+                <SimpleMDE
+                  placeholder="Enter your description here..."
+                  name="description"
+                  {...field}
+                />
+              )}
+              rules={{ required: "Description is required." }}
+            />
+          )}
+          {errors.description && (
+            <p>Description is {errors.description.type}!</p>
+          )}
+          <label className="text-2xl">Username</label>
+          <input
+            {...register("username", { required: true, min: 5 })}
+            placeholder="Enter username here..."
+            className="mb-3 border h-12"
+          />
+          {errors.username && <p>Username is {errors.username.type}!</p>}
+          <input type="submit" className="bg-slate-600 rounded p-5" />
+        </form>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -22,7 +22,6 @@ const TaskForm = () => {
   const router = useRouter();
 
   const handleClick = async (data) => {
-    console.log("DATA", data);
     const response = await axios.post("/api/new-task", {
       data: {
         title: data.title,

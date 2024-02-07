@@ -3,7 +3,7 @@ import prisma from "@/prisma/client";
 export default async function handler(req, res) {
   if (req.method === "GET") {
     const { username, taskId } = req.query;
-    console.log("Q", taskId);
+
     if (taskId) {
       try {
         const task = await prisma.tasklist.findUnique({
@@ -29,7 +29,7 @@ export default async function handler(req, res) {
             createdAt: "desc",
           },
         });
-        console.log("LIST", list);
+
         res.status(200).json({ list });
       } catch (error) {
         res.status(500).json(error);

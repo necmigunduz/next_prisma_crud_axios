@@ -35,21 +35,21 @@ const TaskForm = () => {
   };
   return (
     <div
-      className={`flex min-h-screen flex-col items-center justify-between p-24`}
+      className={`flex flex-col items-center justify-between mt-4`}
     >
-      <h2>Please fill the form to enter a new task!</h2>
+      <h2 className="underline">Please fill the form to enter a new task!</h2>
       <form
         onSubmit={handleSubmit(handleClick)}
-        className="flex flex-col space-y-2"
+        className="flex flex-col space-y-2 pt-4"
       >
-        <label className="text-2xl">Title</label>
+        <label className="text-xl">Task Title</label>
         <input
           {...register("title", { required: true, min: 5, max: 255 })}
           placeholder="Enter task title here..."
-          className="border h-12"
+          className="border"
         />
         {errors.title && <p>Title is {errors.title.type}!</p>}
-        <label className="text-2xl">Description</label>
+        <label className="text-xl">Task Description</label>
         {typeof document !== "undefined" && (
           <Controller
             name="description"
@@ -65,7 +65,7 @@ const TaskForm = () => {
           />
         )}
         {errors.description && <p>Description is {errors.description.type}!</p>}
-        <label className="text-2xl">Username</label>
+        <label className="text-xl">Username</label>
         <input
           {...register("username", { required: true, min: 5 })}
           placeholder="Enter username here..."

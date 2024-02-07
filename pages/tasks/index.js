@@ -7,7 +7,7 @@ const Tasks = () => {
   const [tasks, setTasks] = useState();
   const [user, setUser] = useState();
   const [allUsers, setAllUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
+  
   const getAllUsers = async () => {
     const users = await axios.get("/api/get-all-username");
     setAllUsers(users?.data?.usernames);

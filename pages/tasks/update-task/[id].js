@@ -61,7 +61,7 @@ const UpdateTask = () => {
         username: data.username,
       }),
     })
-    .then((res) => console.log("PUT RES", res))
+    .then(() => router.push(`/tasks/${id}`))
     .catch((e) => console.log("PUT ERR", e));
     return;
   };

@@ -7,6 +7,7 @@ import axios from "axios";
 const UniqueTask = () => {
   const router = useRouter();
   const { id } = router.query;
+  console.log(id)
 
   const [uniqueTask, setUniqueTask] = useState();
   const getTask = async (id) => {

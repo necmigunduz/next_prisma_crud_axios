@@ -1,23 +1,22 @@
 import React from "react";
-import axios from 'axios';
+import axios from "axios";
 import { useRouter } from "next/router";
-import Link from 'next/link';
+import Link from "next/link";
 
 const TaskBox = ({ tasks }) => {
   const router = useRouter();
-  
+
   const handleDelete = async (id) => {
     try {
-      await fetch("/api/delete-task", {
-        method: "DELETE",
-        body: { taskId: id },
+      await axios.delete("/api/delete-task", {
+        data: { taskId: id },
       });
-      router.push("/tasks")
+      router.push("/tasks");
     } catch (error) {
       console.error("Error deleting task:", error);
     }
   };
-  
+
   return (
     <div>
       {tasks?.length === 0 ? (
@@ -31,7 +30,9 @@ const TaskBox = ({ tasks }) => {
                 className="flex flex-col border py-6 px-2 bg-slate-900 text-slate-300 rounded-lg mx-2 text-center"
               >
                 <div className="px-4">
-                  <Link href={`/tasks/${task?.id}`}><h1 className="font-bold">{task?.title}</h1></Link>
+                  <Link href={`/tasks/${task?.id}`}>
+                    <h1 className="font-bold">{task?.title}</h1>
+                  </Link>
                   <p>{task?.description}</p>
                   <p>
                     <span className="font-bold">by </span>
@@ -39,7 +40,12 @@ const TaskBox = ({ tasks }) => {
                   </p>
                 </div>
                 <div className="flex space-x-2 rounded-md mb-2 mt-4 justify-center">
-                  <button className="bg-blue-700 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded active:bg-blue-900" onClick={() => router.push(`/tasks/update-task/${task?.id}`)}>
+                  <button
+                    className="bg-blue-700 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded active:bg-blue-900"
+                    onClick={() =>
+                      router.push(`/tasks/update-task/${task?.id}`)
+                    }
+                  >
                     Update
                   </button>
                   <button

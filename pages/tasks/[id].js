@@ -2,7 +2,7 @@
 import Navbar from "@/components/navbar";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 
 const UniqueTask = () => {
   const router = useRouter();
@@ -27,11 +27,10 @@ const UniqueTask = () => {
 
   const handleDelete = async (id) => {
     try {
-      await fetch("/api/delete-task", {
-        method: "DELETE",
-        body: { taskId: id },
+      await axios.delete("/api/delete-task", {
+        data: { taskId: id },
       });
-      router.push("/tasks")
+      router.push("/tasks");
     } catch (error) {
       console.error("Error deleting task:", error);
     }

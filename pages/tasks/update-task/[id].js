@@ -15,7 +15,7 @@ import Navbar from "@/components/navbar";
 const UpdateTask = () => {
   const params = useParams();
   const id = params?.id;
-  const [uniqueTask, setUniqueTask] = useState({});
+  const [uniqueTask, setUniqueTask] = useState();
 
   const {
     register,
@@ -24,12 +24,11 @@ const UpdateTask = () => {
     control,
     formState: { errors },
   } = useForm();
-  
+
   const getTask = async (id) => {
-    console.log("ID", id)
     try {
       const response = await fetch(`/api/get-task?taskId=${Number(id)}`, {
-        method: "GET"
+        method: "GET",
       });
       const data = await response.json();
       setUniqueTask(data);
@@ -44,18 +43,25 @@ const UpdateTask = () => {
 
   const router = useRouter();
 
-  const handleClick = async (data) => {
+  const handleClick = async (
+    data = {
+      title: uniqueTask?.task?.title,
+      description: uniqueTask?.task?.description,
+      username: uniqueTask?.task?.username,
+    }
+  ) => {
     console.log("DATA", data);
-    const response = await axios.post("/api/new-task", {
-      data: {
-        title: data.title,
-        description: data.description,
-        username: data.username,
-      },
-    });
-    router.push("/tasks");
-    return;
+    // const response = await axios.post("/api/new-task", {
+    //   data: {
+    //     title: data.title,
+    //     description: data.description,
+    //     username: data.username,
+    //   },
+    // });
+    // router.push("/tasks");
+    // return;
   };
+  
   return (
     <>
       <Navbar />
@@ -74,7 +80,7 @@ const UpdateTask = () => {
             className="border"
             defaultValue={uniqueTask?.task?.title}
           />
-          {errors.title && <p>Title is {errors.title.type}!</p>}
+          {errors.title && !uniqueTask && <p>Title is {errors.title.type}!</p>}
           <label className="text-xl">Task Description</label>
           {typeof document !== "undefined" && (
             <Controller
@@ -82,7 +88,6 @@ const UpdateTask = () => {
               control={control}
               render={({ field }) => (
                 <SimpleMDE
-                  // placeholder="Enter your description here..."
                   name="description"
                   {...field}
                   value={uniqueTask?.task?.description}
@@ -91,7 +96,7 @@ const UpdateTask = () => {
               rules={{ required: "Description is required." }}
             />
           )}
-          {errors.description && (
+          {errors.description && !uniqueTask && (
             <p>Description is {errors.description.type}!</p>
           )}
           <label className="text-xl">Username</label>
@@ -101,7 +106,9 @@ const UpdateTask = () => {
             className="mb-3 border h-12"
             defaultValue={uniqueTask?.task?.username}
           />
-          {errors.username && <p>Username is {errors.username.type}!</p>}
+          {errors.username && !uniqueTask && (
+            <p>Username is {errors.username.type}!</p>
+          )}
           <input
             type="submit"
             className="bg-slate-900 rounded p-4 text-white active:bg-slate-600 active:p-5"

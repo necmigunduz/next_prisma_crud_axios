@@ -7,12 +7,12 @@ const Tasks = () => {
   const [tasks, setTasks] = useState();
   const [user, setUser] = useState();
   const [allUsers, setAllUsers] = useState([]);
-  
+
   const getAllUsers = async () => {
     const users = await axios.get("/api/get-all-username");
     setAllUsers(users?.data?.usernames);
   };
-  const getTask = async (username) => {
+  const getTasks = async (username) => {
     await axios
       .get(`/api/get-task?username=${username}`)
       .then((response) => {
@@ -20,11 +20,14 @@ const Tasks = () => {
       })
       .catch((e) => console.log(e));
   };
+  
+  useEffect(() => {
+    getTasks(user);
+  }, [user]);
 
   useEffect(() => {
-    getTask(user);
     getAllUsers();
-  }, [user, tasks]);
+  }, [tasks]);
 
   return (
     <>

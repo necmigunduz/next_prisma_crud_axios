@@ -1,21 +1,26 @@
 import prisma from "@/prisma/client";
 
 export default async function handler(req, res) {
-    if(req.method === "PUT") {
-        const { taskId, title, description } = JSON.parse(req.body);
+    if (req.method === "PUT") {
+        const { id } = req.query;
+        const { title, description, username } = req.body;
+
         try {
             const updatedTask = await prisma.tasklist.update({
                 where: {
-                    id: taskId,
+                    id: Number(id),
                 },
                 data: {
                     title,
                     description,
+                    username
                 }
-            })
-            res.status(200).json({ updatedTask })
+            });
+            console.log("UPTASK", updatedTask);
+            res.status(200).json({ updatedTask });
         } catch (error) {
-            res.status(500).json(error)
+            console.error("Error updating task:", error);
+            res.status(500).json({ error: "Error updating task. Please try again later." });
         }
     }
 }

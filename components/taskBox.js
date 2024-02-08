@@ -1,15 +1,18 @@
 import React from "react";
 import axios from 'axios';
 import { useRouter } from "next/router";
+import Link from 'next/link';
 
 const TaskBox = ({ tasks }) => {
   const router = useRouter();
+  
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete("/api/delete-task", {
-        data: { taskId: id },
+      await fetch("/api/delete-task", {
+        method: "DELETE",
+        body: { taskId: id },
       });
-      return res.data;
+      router.push("/tasks")
     } catch (error) {
       console.error("Error deleting task:", error);
     }
@@ -28,7 +31,7 @@ const TaskBox = ({ tasks }) => {
                 className="flex flex-col border py-6 px-2 bg-slate-900 text-slate-300 rounded-lg mx-2 text-center"
               >
                 <div className="px-4">
-                  <h1 className="font-bold">{task?.title}</h1>
+                  <Link href={`/tasks/${task?.id}`}><h1 className="font-bold">{task?.title}</h1></Link>
                   <p>{task?.description}</p>
                   <p>
                     <span className="font-bold">by </span>

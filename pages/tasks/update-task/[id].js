@@ -50,16 +50,20 @@ const UpdateTask = () => {
       username: uniqueTask?.task?.username,
     }
   ) => {
-    console.log("DATA", data);
-    // const response = await axios.post("/api/new-task", {
-    //   data: {
-    //     title: data.title,
-    //     description: data.description,
-    //     username: data.username,
-    //   },
-    // });
-    // router.push("/tasks");
-    // return;
+    await fetch(`/api/edit-task?id=${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        title: data.title,
+        description: data.description,
+        username: data.username,
+      }),
+    })
+    .then((res) => console.log("PUT RES", res))
+    .catch((e) => console.log("PUT ERR", e));
+    return;
   };
   
   return (
@@ -77,25 +81,34 @@ const UpdateTask = () => {
           <input
             {...register("title", { required: true, min: 5, max: 255 })}
             placeholder="Enter task title here..."
-            className="border"
+            className="border w-96"
             defaultValue={uniqueTask?.task?.title}
           />
           {errors.title && !uniqueTask && <p>Title is {errors.title.type}!</p>}
           <label className="text-xl">Task Description</label>
-          {typeof document !== "undefined" && (
+          <textarea
+            {...register("description", { required: true, min: 1, max: 2500 })}
+            placeholder="Enter task description here..."
+            className="border h-80"
+            defaultValue={uniqueTask?.task?.description}
+          />
+
+          {/* {typeof document !== "undefined" && (
             <Controller
               name="description"
               control={control}
-              render={({ field }) => (
+              render={({ field, ref }) => (
                 <SimpleMDE
                   name="description"
                   {...field}
+                  ref={ref}
                   value={uniqueTask?.task?.description}
+                  onClick={(e) => handleChange(e)}
                 />
               )}
               rules={{ required: "Description is required." }}
             />
-          )}
+          )} */}
           {errors.description && !uniqueTask && (
             <p>Description is {errors.description.type}!</p>
           )}

@@ -31,6 +31,7 @@ const UpdateTask = () => {
         method: "GET",
       });
       const data = await response.json();
+      console.log(data)
       setUniqueTask(data);
     } catch (error) {
       console.log("ERROR", error);

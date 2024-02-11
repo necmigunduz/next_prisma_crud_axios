@@ -20,7 +20,7 @@ const Tasks = () => {
       })
       .catch((e) => console.log(e));
   };
-  
+
   useEffect(() => {
     getTasks(user);
   }, [user]);
@@ -38,9 +38,11 @@ const Tasks = () => {
         </h1>
         <div className="flex flex-col text-center">
           <h4 className="text-xl font-bold">All Users</h4>
-          {allUsers.length ? allUsers.map((user, index) => (
-            <p key={index}>{user}</p>
-          )):  <p>No user found!</p>}
+          {allUsers.length ? (
+            allUsers.map((user, index) => <p key={index}>{user}</p>)
+          ) : (
+            <p>No user found!</p>
+          )}
         </div>
         <span className="border w-128 text-center space-x-6 bg-slate-200 py-4 mx-6 my-6">
           <label>

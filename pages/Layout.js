@@ -4,6 +4,8 @@ import Navbar from "../components/navbar";
 import TaskForm from "@/components/task-form";
 import { useParams } from "next/navigation";
 
+
+
 const Layout = () => {
   const params = useParams();
   console.log("PARAMS", params)
@@ -11,7 +13,7 @@ const Layout = () => {
     <div>
       <Navbar />
       <h1 className="text-center text-3xl mt-6">
-        Welcome to Task List Application
+      Welcome to Task List Application
       </h1>
       <TaskForm />
     </div>

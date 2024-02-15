@@ -28,8 +28,9 @@ const UniqueTask = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete("/api/delete-task", {
-        data: { taskId: id },
+      await fetch("/api/delete-task", {
+        method:"DELETE",
+        body: { taskId: id },
       });
       router.push("/tasks");
     } catch (error) {

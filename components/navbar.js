@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 import Link from "next/link";
+import { FaTasks } from "react-icons/fa";
 
 const Navbar = () => {
   const router = useRouter();
@@ -8,7 +9,10 @@ const Navbar = () => {
   return (
     <nav className="bg-gray-800 p-4">
       <div className="flex items-center justify-between">
-        <div className="text-white text-lg font-semibold px-6">TASK LIST</div>
+      <Link href={"/"}><div className="flex flex-row p-4">
+          <FaTasks color="white" className="text-3xl"/>
+          <div className="text-white text-lg font-semibold px-6">TASK LIST</div>
+        </div></Link>
         <div className="flex space-x-4">
           <Link
             href="/"

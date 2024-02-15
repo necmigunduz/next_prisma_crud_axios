@@ -7,12 +7,15 @@ const TaskBox = ({ tasks }) => {
   const router = useRouter();
 
   const handleDelete = async (id) => {
-    await axios
-      .delete("/api/delete-task", {
-        data: { taskId: id },
-      })
-      .then(() => router.push("/tasks"))
-      .catch((err) => console.log("ERROR Delete Taskbox", err));
+    try {
+      await fetch("/api/delete-task", {
+        method: "DELETE",
+        body: { taskId: id },
+      });
+      router.push("/tasks");
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
   };
 
   return (
